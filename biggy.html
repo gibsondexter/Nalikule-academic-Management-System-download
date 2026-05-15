@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Class Rep Dashboard</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+body{
+    font-family:Arial;
+    margin:0;
+    background:#f4f6f9;
+}
+
+/* HEADER */
+.header{
+    background:#111827;
+    color:white;
+    padding:15px;
+    text-align:center;
+    position:relative;
+}
+
+.header h2{
+    margin:0;
+    font-size:20px;
+}
+
+/* MENU ICON */
+.menu-icon{
+    position:absolute;
+    top:15px;
+    left:15px;
+    font-size:24px;
+    cursor:pointer;
+    color:white;
+}
+
+/* PROFILE ICON */
+.profile-icon{
+    position:absolute;
+    top:15px;
+    right:15px;
+    font-size:28px;
+    color:white;
+    cursor:pointer;
+}
+
+/* PROFILE MENU */
+#profileMenu{
+    position:fixed;
+    top:55px;
+    right:15px;
+    width:220px;
+    background:white;
+    border-radius:12px;
+    padding:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+    z-index:99999;
+    display:none;
+}
+
+/* OVERLAY */
+.overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.4);
+    display:none;
+    z-index:9998;
+}
+
+.overlay.active{
+    display:block;
+}
+
+/* SIDE MENU */
+.side-menu{
+    position:fixed;
+    top:0;
+    left:0;
+    transform:translateX(-100%);
+    width:260px;
+    height:100%;
+    background:#1f2937;
+    color:white;
+    padding:20px;
+    box-sizing:border-box;
+    transition:0.3s;
+    z-index:9999;
+    overflow-y:auto;
+}
+
+.side-menu.active{
+    transform:translateX(0);
+}
+
+/* CLOSE BUTTON */
+.close-btn{
+    text-align:right;
+    margin-bottom:20px;
+}
+
+.close-btn i{
+    font-size:24px;
+    cursor:pointer;
+}
+
+/* SIDE MENU BUTTONS */
+.side-menu button{
+    width:100%;
+    padding:12px;
+    margin-bottom:10px;
+    border:none;
+    border-radius:8px;
+    background:#374151;
+    color:white;
+    cursor:pointer;
+    text-align:left;
+    font-size:15px;
+}
+
+.side-menu button:hover{
+    background:#4b5563;
+}
+
+/* CONTAINER */
+.container{
+    max-width:700px;
+    margin:auto;
+    padding:12px;
+}
+
+/* CARD */
+.card{
+    background:white;
+    padding:15px;
+    margin-bottom:15px;
+    border-radius:12px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.08);
+    display:none;
+}
+
+/* DEFAULT CARD */
+#addCard{
+    display:block;
+}
+
+/* TITLES */
+.card h3{
+    margin-top:0;
+    color:#111827;
+}
+
+/* INPUTS */
+input,
+select,
+button{
+    width:100%;
+    padding:12px;
+    margin-top:8px;
+    border-radius:8px;
+    border:1px solid #ddd;
+    box-sizing:border-box;
+    font-size:15px;
+}
+
+/* BUTTONS */
+button{
+    background:#111827;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1f2937;
+}
+
+/* NAV BUTTON */
+.nav-btn{
+    background:#16a34a;
+}
+
+.nav-btn:hover{
+    background:#15803d;
+}
+
+/* EMERGENCY BUTTON */
+.emergency-btn{
+    background:#dc2626;
+}
+
+.emergency-btn:hover{
+    background:#b91c1c;
+}
+
+/* SUCCESS */
+.success{
+    background:#dcfce7;
+    color:#166534;
+    padding:10px;
+    border-radius:8px;
+    margin-top:10px;
+    display:none;
+}
+
+/* MOBILE */
+@media(max-width:600px){
+
+    .side-menu{
+        width:80%;
+    }
+
+    .header h2{
+        font-size:18px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+
+    <div class="menu-icon"
+    onclick="toggleMenu()">
+
+        <i class="fas fa-bars"></i>
+
+    </div>
+
+    <div class="profile-icon"
+    onclick="toggleProfileMenu()">
+
+        <i class="fas fa-user-circle"></i>
+
+    </div>
+
+    <div id="profileMenu">
+
+        <div id="studentNameBox"></div>
+        <br>
+        <div id="studentRoleBox"></div>
+
+        <br>
+
+        <button onclick="logout()">
+            Logout
+        </button>
+
+    </div>
+
+    <h2 id="welcome">
+        Class Rep Dashboard
+    </h2>
+
+</div>
+
+<!-- OVERLAY -->
+<div class="overlay"
+id="overlay"
+onclick="closeMenu()"></div>
+
+<!-- SIDE MENU -->
+<div class="side-menu"
+id="sideMenu">
+
+    <div class="close-btn">
+
+        <i class="fas fa-times"
+        onclick="closeMenu()"></i>
+
+    </div>
+
+    <button onclick="showSection('examsCard')">
+        📝 Assign Exams
+    </button>
+
+    <button onclick="showSection('addCard')">
+        ➕ Add Class Schedule
+    </button>
+
+    <button onclick="showSection('emergencyCard')">
+        🚨 Add Emergency Class
+    </button>
+
+    <button onclick="showSection('updateCard')">
+        ✏️ Update Class
+    </button>
+
+    <button onclick="showSection('deleteCard')">
+        🗑️ Delete Course
+    </button>
+
+    <button onclick="showSection('statusCard')">
+        📌 Update Status
+    </button>
+
+    <button onclick="goToStudent()">
+        🎓 Student Dashboard
+    </button>
+
+</div>
+
+<!-- CONTAINER -->
+<div class="container">
+
+<!-- EXAMS -->
+<div class="card" id="examsCard">
+
+    <h3>📝 Exams Management</h3>
+
+    <button class="nav-btn"
+    onclick="goToExams()">
+
+        Assign Exams
+
+    </button>
+
+</div>
+
+<!-- ADD CLASS -->
+<div class="card" id="addCard">
+
+    <h3>➕ Add Class Schedule</h3>
+
+    <select id="combination">
+
+        <option value="">
+            Select Program / Combination
+        </option>
+
+        <option value="MAT/AGR">MAT/AGR</option>
+        <option value="MAT/BIO">MAT/BIO</option>
+        <option value="MAT/COM">MAT/COM</option>
+        <option value="MAT/CHEM">MAT/CHEM</option>
+        <option value="MAT/HEC">MAT/HEC</option>
+        <option value="MAT/PHY">MAT/PHY</option>
+
+        <option value="AGR/BIO">AGR/BIO</option>
+        <option value="AGR/HEC">AGR/HEC</option>
+
+        <option value="BIO/HEC">BIO/HEC</option>
+        <option value="ENG/LAL">ENG/LAL</option>
+
+    </select>
+
+    <input id="courseCode"
+    placeholder="Course Code (EDF321)">
+
+    <select id="day">
+
+        <option value="">Select Day</option>
+
+        <option>Monday</option>
+        <option>Tuesday</option>
+        <option>Wednesday</option>
+        <option>Thursday</option>
+        <option>Friday</option>
+        <option>Saturday</option>
+        <option>Sunday</option>
+
+    </select>
+
+    <select id="startTime"></select>
+
+    <select id="endTime"></select>
+
+    <input id="place"
+    placeholder="Place (LT1)">
+
+    <button onclick="addClass()">
+        Add Class
+    </button>
+
+    <div class="success"
+    id="addMessage">
+
+        ✅ Class added successfully
+
+    </div>
+
+</div>
+
+<!-- EMERGENCY -->
+<div class="card" id="emergencyCard">
+
+    <h3>🚨 Add Emergency Class</h3>
+
+    <select id="emergencyCombination">
+
+        <option value="">
+            Select Program / Combination
+        </option>
+
+        <option value="MAT/AGR">MAT/AGR</option>
+        <option value="MAT/BIO">MAT/BIO</option>
+        <option value="MAT/COM">MAT/COM</option>
+        <option value="MAT/CHEM">MAT/CHEM</option>
+        <option value="MAT/HEC">MAT/HEC</option>
+        <option value="MAT/PHY">MAT/PHY</option>
+
+        <option value="AGR/BIO">AGR/BIO</option>
+        <option value="AGR/HEC">AGR/HEC</option>
+
+        <option value="BIO/HEC">BIO/HEC</option>
+        <option value="ENG/LAL">ENG/LAL</option>
+
+    </select>
+
+    <input id="emergencyCourseCode"
+    placeholder="Course Code">
+
+    <select id="emergencyDay">
+
+        <option value="">Select Day</option>
+
+        <option>Monday</option>
+        <option>Tuesday</option>
+        <option>Wednesday</option>
+        <option>Thursday</option>
+        <option>Friday</option>
+        <option>Saturday</option>
+        <option>Sunday</option>
+
+    </select>
+
+    <select id="emergencyStartTime"></select>
+
+    <select id="emergencyEndTime"></select>
+
+    <input id="emergencyPlace"
+    placeholder="Place">
+
+    <button class="emergency-btn"
+    onclick="addEmergencyClass()">
+
+        🚨 Add Emergency Class
+
+    </button>
+
+    <div class="success"
+    id="emergencyMessage">
+
+        🚨 Emergency class added successfully
+
+    </div>
+
+</div>
+
+<!-- UPDATE -->
+<div class="card" id="updateCard">
+
+    <h3>✏️ Update Class</h3>
+
+    <select id="updateClassList"
+    onchange="loadSelectedClass()">
+
+        <option value="">
+            Select Course
+        </option>
+
+    </select>
+
+    <select id="newCombination">
+
+        <option value="">
+            Select Program / Combination
+        </option>
+
+        <option value="MAT/AGR">MAT/AGR</option>
+        <option value="MAT/BIO">MAT/BIO</option>
+        <option value="MAT/COM">MAT/COM</option>
+        <option value="MAT/CHEM">MAT/CHEM</option>
+        <option value="MAT/HEC">MAT/HEC</option>
+        <option value="MAT/PHY">MAT/PHY</option>
+
+        <option value="AGR/BIO">AGR/BIO</option>
+        <option value="AGR/HEC">AGR/HEC</option>
+
+        <option value="BIO/HEC">BIO/HEC</option>
+        <option value="ENG/LAL">ENG/LAL</option>
+
+    </select>
+
+    <input id="newCourseCode"
+    placeholder="Course Code">
+
+    <select id="newDay">
+
+        <option value="">Select Day</option>
+
+        <option>Monday</option>
+        <option>Tuesday</option>
+        <option>Wednesday</option>
+        <option>Thursday</option>
+        <option>Friday</option>
+        <option>Saturday</option>
+        <option>Sunday</option>
+
+    </select>
+
+    <select id="newStartTime"></select>
+
+    <select id="newEndTime"></select>
+
+    <input id="newPlace"
+    placeholder="Place">
+
+    <button onclick="updateClass()">
+        Update Class
+    </button>
+
+</div>
+
+<!-- DELETE -->
+<div class="card" id="deleteCard">
+
+    <h3>🗑️ Delete Course</h3>
+
+    <select id="deleteClassList">
+
+        <option value="">
+            Select Course
+        </option>
+
+    </select>
+
+    <button onclick="deleteClass()">
+        Delete Course
+    </button>
+
+</div>
+
+<!-- STATUS -->
+<div class="card" id="statusCard">
+
+    <h3>📌 Update Status</h3>
+
+    <select id="statusClassList">
+
+        <option value="">
+            Select Course
+        </option>
+
+    </select>
+
+    <select id="status">
+
+        <option value="normal">
+            ✅ Normal
+        </option>
+
+        <option value="confirmed">
+            ✅ Confirmed
+        </option>
+
+        <option value="emergency">
+            🚨 Emergency
+        </option>
+
+        <option value="cancelled">
+            ❌ Cancelled
+        </option>
+
+    </select>
+
+    <button onclick="markStatus()">
+        Update Status
+    </button>
+
+</div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+
+import {
+    getAuth,
+    onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    updateDoc,
+    deleteDoc,
+    doc,
+    query,
+    where,
+    getDocs
+}
+from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+
+const firebaseConfig = {
+
+  apiKey: "AIzaSyBK8FCjL2hrFLS2a9I0VNwMGzbWMqF2xBI",
+  authDomain: "nce-student-time-table.firebaseapp.com",
+  projectId: "nce-student-time-table"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const auth = getAuth(app);
+
+let repName = "";
+let repYear = "";
+
+/* MENU */
+window.toggleMenu = function(){
+
+    document.getElementById("sideMenu")
+    .classList.toggle("active");
+
+    document.getElementById("overlay")
+    .classList.toggle("active");
+};
+
+window.closeMenu = function(){
+
+    document.getElementById("sideMenu")
+    .classList.remove("active");
+
+    document.getElementById("overlay")
+    .classList.remove("active");
+};
+
+/* PROFILE */
+window.toggleProfileMenu = function(){
+
+    let menu =
+    document.getElementById("profileMenu");
+
+    menu.style.display =
+    menu.style.display === "block"
+    ? "none"
+    : "block";
+};
+
+window.logout = function(){
+
+    localStorage.clear();
+
+    window.location.href =
+    "index.html";
+};
+
+/* SHOW SECTION */
+window.showSection = function(id){
+
+    let cards =
+    document.querySelectorAll(".card");
+
+    cards.forEach(card=>{
+
+        card.style.display = "none";
+
+    });
+
+    document.getElementById(id)
+    .style.display = "block";
+
+    closeMenu();
+};
+
+/* NAVIGATION */
+window.goToExams = function(){
+
+    window.location.href =
+    "exam_assign.html";
+};
+
+window.goToStudent = function(){
+
+    window.location.href =
+    "student.html";
+};
+
+/* TIME */
+function generateTimeOptions(id){
+
+    let select =
+    document.getElementById(id);
+
+    for(let h=6; h<=23; h++){
+
+        let hour =
+        h.toString().padStart(2,"0");
+
+        let value =
+        hour + ":30";
+
+        let option =
+        document.createElement("option");
+
+        option.value = value;
+        option.text = value;
+
+        select.appendChild(option);
+    }
+}
+
+generateTimeOptions("startTime");
+generateTimeOptions("endTime");
+
+generateTimeOptions("newStartTime");
+generateTimeOptions("newEndTime");
+
+generateTimeOptions("emergencyStartTime");
+generateTimeOptions("emergencyEndTime");
+
+/* LOGIN */
+onAuthStateChanged(auth,
+async(user)=>{
+
+    if(user){
+
+        let username =
+        user.email.split("@")[0];
+
+        let q = query(
+            collection(db,"users"),
+            where("username","==",username)
+        );
+
+        let snap =
+        await getDocs(q);
+
+        snap.forEach(d=>{
+
+            let data =
+            d.data();
+
+            repName =
+            data.name;
+
+            repYear =
+            data.year;
+
+            document.getElementById("welcome")
+            .innerText =
+            "Welcome " +
+            repName +
+            " (Year " +
+            repYear + ")";
+
+            document.getElementById("studentNameBox")
+            .innerHTML =
+            "<b>" + data.name + "</b>";
+
+            document.getElementById("studentRoleBox")
+            .innerHTML =
+            "Class Rep - Year " +
+            data.year;
+
+        });
+
+        loadMyClasses();
+
+    }else{
+
+        window.location.href =
+        "index.html";
+    }
+});
+
+/* ADD CLASS */
+window.addClass =
+async function(){
+
+    let combination =
+    document.getElementById("combination").value;
+
+    let courseCode =
+    document.getElementById("courseCode").value;
+
+    let day =
+    document.getElementById("day").value;
+
+    let start =
+    document.getElementById("startTime").value;
+
+    let end =
+    document.getElementById("endTime").value;
+
+    let place =
+    document.getElementById("place").value;
+
+    if(!combination ||
+       !courseCode ||
+       !day ||
+       !start ||
+       !end ||
+       !place){
+
+        alert("Fill all fields");
+        return;
+    }
+
+    let fullTime =
+    start + "-" + end;
+
+    await addDoc(
+    collection(db,"classes"),{
+
+        repName,
+        year:repYear,
+
+        combination,
+        courseCode,
+        day,
+
+        time:fullTime,
+
+        place,
+
+        status:"normal",
+
+        timestamp:Date.now()
+
+    });
+
+    document.getElementById("addMessage")
+    .style.display = "block";
+
+    setTimeout(()=>{
+
+        document.getElementById("addMessage")
+        .style.display = "none";
+
+    },3000);
+
+    document.getElementById("courseCode").value="";
+    document.getElementById("place").value="";
+
+    alert("Class added successfully");
+
+    loadMyClasses();
+};
+
+/* ADD EMERGENCY */
+window.addEmergencyClass =
+async function(){
+
+    let combination =
+    document.getElementById("emergencyCombination").value;
+
+    let courseCode =
+    document.getElementById("emergencyCourseCode").value;
+
+    let day =
+    document.getElementById("emergencyDay").value;
+
+    let start =
+    document.getElementById("emergencyStartTime").value;
+
+    let end =
+    document.getElementById("emergencyEndTime").value;
+
+    let place =
+    document.getElementById("emergencyPlace").value;
+
+    if(!combination ||
+       !courseCode ||
+       !day ||
+       !start ||
+       !end ||
+       !place){
+
+        alert("Fill all fields");
+        return;
+    }
+
+    let fullTime =
+    start + "-" + end;
+
+    await addDoc(
+    collection(db,"classes"),{
+
+        repName,
+        year:repYear,
+
+        combination,
+        courseCode,
+        day,
+
+        time:fullTime,
+
+        place,
+
+        status:"emergency",
+
+        timestamp:Date.now()
+
+    });
+
+    document.getElementById("emergencyMessage")
+    .style.display = "block";
+
+    setTimeout(()=>{
+
+        document.getElementById("emergencyMessage")
+        .style.display = "none";
+
+    },3000);
+
+    document.getElementById("emergencyCourseCode").value="";
+    document.getElementById("emergencyPlace").value="";
+
+    alert("Emergency class added");
+
+    loadMyClasses();
+};
+
+/* LOAD CLASSES */
+async function loadMyClasses(){
+
+    let q =
+    query(
+        collection(db,"classes"),
+        where("repName","==",repName)
+    );
+
+    let snap =
+    await getDocs(q);
+
+    let updateList =
+    document.getElementById("updateClassList");
+
+    let deleteList =
+    document.getElementById("deleteClassList");
+
+    let statusList =
+    document.getElementById("statusClassList");
+
+    updateList.innerHTML =
+    `<option value="">Select Course</option>`;
+
+    deleteList.innerHTML =
+    `<option value="">Select Course</option>`;
+
+    statusList.innerHTML =
+    `<option value="">Select Course</option>`;
+
+    snap.forEach(d=>{
+
+        let c =
+        d.data();
+
+        let text =
+        c.courseCode +
+        " | " +
+        c.combination +
+        " | " +
+        c.day +
+        " | " +
+        c.time +
+        " | " +
+        c.place;
+
+        let opt1 =
+        document.createElement("option");
+
+        opt1.value = d.id;
+        opt1.text = text;
+
+        opt1.dataset.courseCode =
+        c.courseCode;
+
+        opt1.dataset.day =
+        c.day;
+
+        opt1.dataset.time =
+        c.time;
+
+        opt1.dataset.place =
+        c.place;
+
+        opt1.dataset.combination =
+        c.combination;
+
+        updateList.appendChild(opt1);
+
+        let opt2 =
+        document.createElement("option");
+
+        opt2.value = d.id;
+        opt2.text = text;
+
+        deleteList.appendChild(opt2);
+
+        let opt3 =
+        document.createElement("option");
+
+        opt3.value = d.id;
+        opt3.text = text;
+
+        statusList.appendChild(opt3);
+
+    });
+}
+
+/* LOAD SELECTED */
+window.loadSelectedClass =
+function(){
+
+    let select =
+    document.getElementById("updateClassList");
+
+    let option =
+    select.options[select.selectedIndex];
+
+    if(!option.value)
+    return;
+
+    document.getElementById("newCombination").value =
+    option.dataset.combination;
+
+    document.getElementById("newCourseCode").value =
+    option.dataset.courseCode;
+
+    document.getElementById("newDay").value =
+    option.dataset.day;
+
+    document.getElementById("newPlace").value =
+    option.dataset.place;
+
+    let splitTime =
+    option.dataset.time.split("-");
+
+    document.getElementById("newStartTime").value =
+    splitTime[0];
+
+    document.getElementById("newEndTime").value =
+    splitTime[1];
+};
+
+/* UPDATE */
+window.updateClass =
+async function(){
+
+    let id =
+    document.getElementById("updateClassList").value;
+
+    if(!id){
+
+        alert("Select class");
+        return;
+    }
+
+    let newTime =
+    document.getElementById("newStartTime").value
+    + "-" +
+    document.getElementById("newEndTime").value;
+
+    await updateDoc(
+    doc(db,"classes",id),{
+
+        combination:
+        document.getElementById("newCombination").value,
+
+        courseCode:
+        document.getElementById("newCourseCode").value,
+
+        day:
+        document.getElementById("newDay").value,
+
+        time:newTime,
+
+        place:
+        document.getElementById("newPlace").value
+
+    });
+
+    alert("Class updated");
+
+    loadMyClasses();
+};
+
+/* DELETE */
+window.deleteClass =
+async function(){
+
+    let id =
+    document.getElementById("deleteClassList").value;
+
+    if(!id){
+
+        alert("Select course");
+        return;
+    }
+
+    await deleteDoc(
+    doc(db,"classes",id)
+    );
+
+    alert("Course deleted");
+
+    loadMyClasses();
+};
+
+/* STATUS */
+window.markStatus =
+async function(){
+
+    let id =
+    document.getElementById("statusClassList").value;
+
+    let status =
+    document.getElementById("status").value;
+
+    if(!id){
+
+        alert("Select course");
+        return;
+    }
+
+    await updateDoc(
+    doc(db,"classes",id),{
+
+        status
+
+    });
+
+    alert("Status updated");
+};
+
+</script>
+
+</body>
+</html>
