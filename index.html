@@ -3,12 +3,11 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <title>NCE Academic Management System</title>
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
 
@@ -21,263 +20,271 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 }
 
 body{
-    background:linear-gradient(135deg,#dbeafe,#f8fafc);
+    background:#f8fafc;
     min-height:100vh;
     display:flex;
     justify-content:center;
-    padding:12px;
+    align-items: flex-start;
 }
 
-/* MAIN CONTAINER */
+/* MAIN CONTAINER - RIGID APP LOOK */
 .container{
     width:100%;
-    max-width:500px;
+    max-width:480px;
     background:white;
-    border-radius:28px;
-    overflow:hidden;
-    box-shadow:0 15px 40px rgba(0,0,0,0.12);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow:0 0 20px rgba(0,0,0,0.05);
 }
 
 /* HEADER */
 .header{
     background:linear-gradient(135deg,#0f172a,#2563eb);
-    padding:30px 20px;
+    padding:24px 16px;
     text-align:center;
     color:white;
 }
 
 .logo{
-    width:95px;
-    height:95px;
+    width:85px;
+    height:85px;
     object-fit:cover;
-    border-radius:22px;
+    border-radius:20px;
     background:white;
-    padding:6px;
-    margin-bottom:12px;
-    box-shadow:0 5px 20px rgba(255,255,255,0.2);
+    padding:5px;
+    margin-bottom:10px;
+    box-shadow:0 4px 15px rgba(255,255,255,0.15);
 }
 
 .title{
-    font-size:25px;
+    font-size:22px;
     font-weight:bold;
-    line-height:1.4;
+    line-height:1.3;
 }
 
 .developer{
-    margin-top:8px;
+    margin-top:6px;
     color:#dbeafe;
-    font-size:14px;
+    font-size:13px;
 }
 
 .badge{
-    margin-top:14px;
+    margin-top:10px;
     display:inline-block;
     background:#22c55e;
-    padding:7px 16px;
+    padding:5px 12px;
     border-radius:30px;
-    font-size:13px;
+    font-size:12px;
     font-weight:bold;
 }
 
-/* CONTENT */
+/* CONTENT CONTAINER */
 .content{
-    padding:18px;
+    padding:16px;
+    flex: 1;
 }
 
 /* STATS */
 .stats{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:10px;
-    margin-bottom:20px;
+    gap:8px;
+    margin-bottom:16px;
 }
 
 .stat{
     background:#f8fafc;
-    padding:15px 10px;
-    border-radius:18px;
+    padding:12px 8px;
+    border-radius:14px;
     text-align:center;
     border:1px solid #e2e8f0;
 }
 
 .stat h2{
     color:#2563eb;
-    font-size:22px;
+    font-size:20px;
 }
 
 .stat p{
-    margin-top:5px;
-    font-size:12px;
+    margin-top:4px;
+    font-size:11px;
     color:#64748b;
 }
 
-/* DESCRIPTION */
+/* DESCRIPTION (Brought Back!) */
 .description{
     background:#f8fafc;
-    border-radius:18px;
-    padding:15px;
-    line-height:1.7;
-    font-size:14px;
-    color:#334155;
-    margin-bottom:22px;
-}
-
-/* FEATURES */
-.section-title{
-    font-size:18px;
-    margin-bottom:12px;
-    color:#0f172a;
-}
-
-.feature{
-    display:flex;
-    align-items:center;
-    background:#f8fafc;
-    padding:14px;
     border-radius:14px;
-    margin-bottom:10px;
-    border:1px solid #e2e8f0;
-}
-
-.feature i{
-    color:#2563eb;
-    font-size:18px;
-    margin-right:12px;
-}
-
-.feature span{
-    font-size:14px;
+    padding:14px;
+    line-height:1.6;
+    font-size:13.5px;
     color:#334155;
+    margin-bottom:20px;
+    border: 1px solid #e2e8f0;
 }
 
-/* SCREENSHOTS */
+/* SCREENSHOTS SECTION (Made smaller and more compact) */
+.section-title{
+    font-size:16px;
+    font-weight: bold;
+    margin-bottom:10px;
+    color:#0f172a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .screenshots{
     display:flex;
-    gap:10px;
+    gap:8px;
     overflow-x:auto;
-    margin-top:10px;
-    margin-bottom:25px;
+    margin-bottom:20px;
     padding-bottom:5px;
+    scrollbar-width: none; 
+}
+.screenshots::-webkit-scrollbar {
+    display: none; 
 }
 
 .screenshots img{
-    width:145px;
-    height:280px;
+    width:105px;    /* Shrunk width down from 125px */
+    height:190px;   /* Shrunk height down from 230px */
     object-fit:cover;
-    border-radius:20px;
-    border:3px solid #e2e8f0;
+    border-radius:12px;
+    border:2px solid #e2e8f0;
+    flex-shrink: 0;
 }
 
 /* DOWNLOAD BUTTON */
 .download-btn{
     width:100%;
-    padding:16px;
+    padding:14px;
     border:none;
-    border-radius:18px;
+    border-radius:14px;
     background:linear-gradient(135deg,#2563eb,#1d4ed8);
     color:white;
-    font-size:17px;
+    font-size:16px;
     font-weight:bold;
     cursor:pointer;
-    transition:0.3s;
-    box-shadow:0 10px 25px rgba(37,99,235,0.3);
+    transition:0.2s;
+    box-shadow:0 8px 20px rgba(37,99,235,0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
 }
 
-.download-btn:hover{
-    transform:scale(1.02);
+.download-btn:active{
+    transform:scale(0.98);
 }
 
-/* COMMENTS */
+/* COMMENTS SYSTEM */
 .comments{
-    margin-top:30px;
+    margin-top:24px;
+    border-top: 1px dashed #e2e8f0;
+    padding-top:20px;
+}
+
+.comment-count-badge {
+    background: #2563eb;
+    color: white;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: bold;
 }
 
 .comments input,
 .comments textarea{
     width:100%;
-    padding:14px;
-    margin-top:10px;
+    padding:12px;
+    margin-top:8px;
     border:1px solid #cbd5e1;
-    border-radius:14px;
+    border-radius:10px;
     outline:none;
     font-size:14px;
+    background: #f8fafc;
 }
 
 .comments textarea{
     resize:none;
-    min-height:100px;
+    min-height:75px;
 }
 
 .comments button{
     width:100%;
-    margin-top:12px;
-    padding:14px;
+    margin-top:8px;
+    padding:12px;
     border:none;
-    border-radius:14px;
+    border-radius:10px;
     background:#111827;
     color:white;
-    font-size:15px;
+    font-size:14px;
+    font-weight: bold;
     cursor:pointer;
+}
+
+#commentsList {
+    margin-top: 16px;
 }
 
 .comment-card{
     background:#f8fafc;
-    border-left:5px solid #2563eb;
-    padding:14px;
-    border-radius:15px;
-    margin-top:14px;
-    animation:fadeIn 0.4s ease;
+    border-left:4px solid #2563eb;
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:10px;
+    animation:fadeIn 0.3s ease;
 }
 
 .comment-name{
     font-weight:bold;
     color:#0f172a;
-    margin-bottom:5px;
+    font-size:13px;
+    margin-bottom:3px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.comment-name i {
+    color: #64748b;
 }
 
 .comment-time{
-    font-size:11px;
+    font-size:10px;
     color:#64748b;
-    margin-bottom:8px;
+    margin-bottom:6px;
 }
 
 .comment-text{
     color:#334155;
-    line-height:1.5;
-    font-size:14px;
+    line-height:1.4;
+    font-size:13px;
 }
 
 .footer{
-    padding:18px;
+    padding:16px;
     text-align:center;
     color:#64748b;
-    font-size:12px;
+    font-size:11px;
     border-top:1px solid #e2e8f0;
+    background: #f8fafc;
 }
 
 @keyframes fadeIn{
-    from{
-        opacity:0;
-        transform:translateY(10px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+    from{ opacity:0; transform:translateY(6px); }
+    to{ opacity:1; transform:translateY(0); }
 }
 
-/* MOBILE */
-@media(max-width:500px){
-
-    .title{
-        font-size:22px;
+/* FULL EDGE-TO-EDGE ON MOBILE DEVICES */
+@media(max-width:480px){
+    body {
+        padding: 0;
     }
-
-    .screenshots img{
-        width:130px;
-        height:250px;
+    .container {
+        box-shadow: none;
     }
-
 }
 
 </style>
@@ -289,21 +296,10 @@ body{
 
     <!-- HEADER -->
     <div class="header">
-
-        <img src="logo.PNG" class="logo">
-
-        <div class="title">
-            NCE Academic Management System
-        </div>
-
-        <div class="developer">
-            Developed by Dexter Gibson
-        </div>
-
-        <div class="badge">
-            Official Student App
-        </div>
-
+        <img src="logo.PNG" class="logo" alt="App Logo">
+        <div class="title">NCE Academic Management System</div>
+        <div class="developer">Developed by Dexter Gibson</div>
+        <div class="badge">Official Student App</div>
     </div>
 
     <!-- CONTENT -->
@@ -311,293 +307,167 @@ body{
 
         <!-- STATS -->
         <div class="stats">
-
             <div class="stat">
                 <h2 id="downloads">0</h2>
                 <p>Downloads</p>
             </div>
-
             <div class="stat">
                 <h2>1.0</h2>
                 <p>Version</p>
             </div>
-
             <div class="stat">
                 <h2>24MB</h2>
                 <p>Size</p>
             </div>
-
         </div>
 
         <!-- DESCRIPTION -->
         <div class="description">
-
             The NCE Academic Management System helps students access daily timetables, examination schedules, academic resources and important school announcements anytime.
-
         </div>
 
-        <!-- FEATURES -->
-        <div class="section-title">
-            Features
-        </div>
-
-        <div class="feature">
-            <i class="fas fa-calendar-days"></i>
-            <span>Live Daily Timetable</span>
-        </div>
-
-        <div class="feature">
-            <i class="fas fa-book"></i>
-            <span>Reading Timetable</span>
-        </div>
-
-        <div class="feature">
-            <i class="fas fa-bell"></i>
-            <span>Examination Schedule</span>
-        </div>
-
-        <div class="feature">
-            <i class="fas fa-book-open"></i>
-            <span>Academic Resources</span>
-        </div>
-
-        <div class="feature">
-            <i class="fas fa-bullhorn"></i>
-            <span>Funny Announcements</span>
-        </div>
-        <div class="feature">
-            <i class="fas fa-money"></i>
-            <span>Easy access to SRC fee payment method</span>
-        </div>
-
-        <!-- SCREENSHOTS -->
-        <div class="section-title" style="margin-top:25px;">
-            Screenshots
-        </div>
-
+        <!-- SCREENSHOTS (Now beautifully micro-sized for mobile screens) -->
+        <div class="section-title">Screenshots</div>
         <div class="screenshots">
-
-            <img src="screen1.jpeg">
-            <img src="screen2.jpeg">
-            <img src="screen3.jpeg">
-            <img src="screen4.jpeg">
-
+            <img src="screen1.jpeg" alt="Preview 1">
+            <img src="screen2.jpeg" alt="Preview 2">
+            <img src="screen3.jpeg" alt="Preview 3">
+            <img src="screen4.jpeg" alt="Preview 4">
         </div>
 
-        <!-- DOWNLOAD -->
-        <button class="download-btn"
-        onclick="downloadApp()">
-
-            <i class="fas fa-download"></i>
-            Download APK
-
+        <!-- DOWNLOAD ACTION -->
+        <button class="download-btn" onclick="downloadApp()">
+            <i class="fas fa-download"></i> Download APP
         </button>
 
-        <!-- COMMENTS -->
+        <!-- COMMENTS SECTION -->
         <div class="comments">
-
             <div class="section-title">
-                Student Comments
+                <span>Student Comments</span>
+                <span class="comment-count-badge" id="commentCount">0</span>
             </div>
 
-            <input type="text"
-            id="name"
-            placeholder="Enter your name">
-
-            <textarea
-            id="comment"
-            placeholder="Write your comment here..."></textarea>
-
-            <button onclick="postComment()">
-                Post Comment
-            </button>
+            <input type="text" id="name" placeholder="Enter your name">
+            <textarea id="comment" placeholder="Write your comment here..."></textarea>
+            <button onclick="postComment()">Post Comment</button>
 
             <div id="commentsList"></div>
-
         </div>
 
     </div>
 
     <div class="footer">
-        © 2026 Nalikule College of Education
+        &copy; 2026 Student Academic Management System
     </div>
 
 </div>
 
-<!-- FIREBASE -->
+<!-- FIREBASE CONNECTIONS -->
 <script type="module">
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
-
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
 import {
     getFirestore,
     doc,
     getDoc,
     setDoc,
-    updateDoc,
     increment,
     collection,
     addDoc,
     onSnapshot,
     query,
     orderBy
-}
-from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
 
-/* FIREBASE CONFIG */
 const firebaseConfig = {
-
     apiKey: "AIzaSyAJHU7IWppw73foXUunM20-RxRAwfokQf0",
     authDomain: "nce-academic-management-system.firebaseapp.com",
     projectId: "nce-academic-management-system",
     storageBucket: "nce-academic-management-system.firebasestorage.app",
     messagingSenderId: "485127778137",
     appId: "1:485127778137:web:317cdabcc10a8d40382648"
-
 };
 
-/* INITIALIZE */
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-/* LOAD DOWNLOADS */
 async function loadDownloads(){
-
     try{
-
         const ref = doc(db,"appStats","downloads");
-
         const snap = await getDoc(ref);
-
         if(snap.exists()){
-
-            document.getElementById("downloads").innerText =
-            snap.data().count || 0;
-
+            document.getElementById("downloads").innerText = snap.data().count || 0;
         }else{
-
             await setDoc(ref,{count:0});
-
             document.getElementById("downloads").innerText = 0;
-
         }
-
     }catch(error){
-
         console.log(error);
-
     }
-
 }
-
 loadDownloads();
 
-/* DOWNLOAD FUNCTION */
 window.downloadApp = async function(){
-
     try{
-
         const ref = doc(db,"appStats","downloads");
-
-        await setDoc(ref,{
-            count: increment(1)
-        },{merge:true});
-
+        await setDoc(ref,{ count: increment(1) },{merge:true});
         loadDownloads();
-
     }catch(error){
-
         console.log(error);
-
     }
-
-    /* APK DOWNLOAD */
-    window.open(
-        "app-release.apk",
-        "_blank"
-    );
-
+    window.open("app-release.apk", "_blank");
 };
 
-/* POST COMMENT */
 window.postComment = async function(){
-
-    const name =
-    document.getElementById("name").value.trim();
-
-    const comment =
-    document.getElementById("comment").value.trim();
+    const name = document.getElementById("name").value.trim();
+    const comment = document.getElementById("comment").value.trim();
 
     if(name === "" || comment === ""){
-
         alert("Please fill all fields");
         return;
-
     }
 
     try{
-
         await addDoc(collection(db,"comments"),{
-
-            name:name,
-            comment:comment,
-            time:Date.now()
-
+            name: name,
+            comment: comment,
+            time: Date.now()
         });
-
         document.getElementById("name").value = "";
         document.getElementById("comment").value = "";
-
     }catch(error){
-
         alert(error);
-
     }
-
 };
 
-/* LIVE COMMENTS */
-const q = query(
-    collection(db,"comments"),
-    orderBy("time","desc")
-);
+const q = query(collection(db,"comments"), orderBy("time","desc"));
 
-onSnapshot(q,(snapshot)=>{
-
+onSnapshot(q, (snapshot) => {
     let html = "";
+    
+    document.getElementById("commentCount").innerText = snapshot.size;
 
-    snapshot.forEach((doc)=>{
-
+    snapshot.forEach((doc) => {
         const c = doc.data();
-
         const date = new Date(c.time);
 
         html += `
-
         <div class="comment-card">
-
             <div class="comment-name">
                 <i class="fas fa-user-circle"></i>
                 ${c.name}
             </div>
-
             <div class="comment-time">
                 ${date.toLocaleString()}
             </div>
-
             <div class="comment-text">
                 ${c.comment}
             </div>
-
         </div>
-
         `;
-
     });
 
     document.getElementById("commentsList").innerHTML = html;
-
 });
 
 </script>
